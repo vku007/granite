@@ -1,0 +1,25 @@
+
+<!--div *ngIf="selectedProgram">
+  <h2>{{selectedProgram.name | uppercase}} Details</h2>
+  <div><span>id: </span>{{selectedProgram.id}}</div>
+  <div><span>name: </span>{{selectedProgram.name}}</div>
+
+  <div>
+    <label>name:
+      <input [(ngModel)]="selectedProgram.name" placeholder="name"/>
+    </label>
+  </div>
+</div-->
+
+
+<h2>list:</h2>
+
+<ul class = "programs">
+  <li *ngFor="let program of programs"
+      [class.selected]="program === selectedProgram"
+      (click)="onSelect(program)">
+    <span class = "badge">{{program.id}}</span> {{program.name}}
+  </li>
+</ul>
+
+<app-program-detail [program]="selectedProgram"></app-program-detail>

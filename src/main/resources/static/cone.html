@@ -54,6 +54,9 @@
         var indices = [];
         var vertices = [];
 
+        var inc = 0;
+        var infopanel = document.getElementById('info');
+
         var mvMatrix = mat4.create(); // The Model-View matrix
         var pMatrix = mat4.create(); // The projection matrix
 
@@ -130,7 +133,11 @@
          */
         function drawScene(){
 
+            //gl.clearColor(inc, 0.0, 0.0, 1.0);
             gl.clearColor(0.0, 0.0, 0.0, 1.0);
+            inc = inc + 0.001;
+
+            if (infopanel != null) infopanel.innerHTML = inc;
             gl.enable(gl.DEPTH_TEST);
 
             gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
@@ -138,7 +145,7 @@
 
             mat4.perspective(45, c_width / c_height, 0.1, 10000.0, pMatrix);
             mat4.identity(mvMatrix);
-            mat4.translate(mvMatrix, [0.0, 0.0, -5.0]);
+            mat4.translate(mvMatrix, [0.0, 0.0, -5.0-inc]);
 
             gl.uniformMatrix4fv(prg.pMatrixUniform, false, pMatrix);
             gl.uniformMatrix4fv(prg.mvMatrixUniform, false, mvMatrix);
@@ -148,7 +155,7 @@
             gl.enableVertexAttribArray(prg.vertexPositionAttribute);
 
             gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, coneIndexBuffer);
-            gl.drawElements(gl.LINE_LOOP, indices.length, gl.UNSIGNED_SHORT,0);
+            gl.drawElements(gl.TRIANGLES, indices.length, gl.UNSIGNED_SHORT,0);
         }
 
         /**
@@ -166,6 +173,7 @@
         function runWebGLApp(){
             //Obtains a WebGL context
             gl = utils.getGLContext('canvas-element-id');
+            infopanel =document.getElementById('info');
             //Initializes the program (shaders). More about this on chapter 3!
             initProgram();
             //Initializes the buffers that we are going to use to draw the cone (vertex buffer and index buffer)
@@ -188,6 +196,7 @@
 
 <div id='contents'>
     <div id='canvasContainer'>
+        <div id = 'info'>inc</div>
         <canvas id='canvas-element-id' width='480' height='400'>
             Your browser does not support the HTML5 canvas element.
         </canvas>
