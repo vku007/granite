@@ -7,6 +7,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class GraniteApplication {
 
 	public static void main(String[] args) throws Exception {
+		initLocalDb();
+
 		SpringApplication.run(GraniteApplication.class, args);
+	}
+
+	private static void initLocalDb() {
+
 	}
 }
