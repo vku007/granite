@@ -1,0 +1,9 @@
+<h2>list of tests:</h2>
+
+<ul class = "dynamo-tests">
+  <li *ngFor="let test of testList">
+    <a routerLink="/dynamo/detail/{{test.id}}">
+      <span class="badge">{{test.id}}</span> {{test.name}}
+    </a>
+  </li>
+</ul>

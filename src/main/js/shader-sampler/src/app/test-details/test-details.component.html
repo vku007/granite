@@ -1,0 +1,12 @@
+<div *ngIf="test">
+  <h2>{{test.name | uppercase}} Details</h2>
+  <div><span>Description</span> {{test.desc}}</div>
+  <div>
+    <button (click)="makeCall()">call me</button>
+  </div>
+  <div>
+    {{output}}
+  </div>
+  <button (click)="goBack()">go back</button>
+
+</div>

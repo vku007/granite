@@ -5,3 +5,15 @@ ng new shader-sampler
 ng serve --open
 
 
+./src/main/js/shader-sampler/
+
+ng generate component programs
+npm install angular-in-memory-web-api --save
+
+ ng build  --base-href="/shader-sampler" --deploy-url "/shader-sampler/"
+
+
+
+
+
+

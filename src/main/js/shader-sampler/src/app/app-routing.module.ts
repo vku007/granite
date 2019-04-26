@@ -1,8 +1,15 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import {ProgramsComponent} from "./programs/programs.component";
+import {DashboardComponent} from "./dashboard/dashboard.component";
+import {TestDetailsComponent} from "./test-details/test-details.component";
 
-const routes: Routes = [{path: 'programs', component: ProgramsComponent}];
+const routes: Routes = [
+  { path: '', redirectTo: '/dynamo', pathMatch: 'full' },
+  {path: 'programs', component: ProgramsComponent},
+  { path: 'dynamo', component: DashboardComponent },
+  { path: 'dynamo/detail/:id', component: TestDetailsComponent },
+  ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

@@ -1,71 +1,44 @@
 package com.magjin.controller;
 
-import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
-import com.amazonaws.services.dynamodbv2.document.DynamoDB;
-import com.amazonaws.services.dynamodbv2.document.Index;
-import com.amazonaws.services.dynamodbv2.document.Table;
-import com.amazonaws.services.dynamodbv2.document.TableCollection;
-import com.amazonaws.services.dynamodbv2.model.CreateTableRequest;
-import com.amazonaws.services.dynamodbv2.model.ListTablesResult;
-import com.amazonaws.services.dynamodbv2.model.ProvisionedThroughput;
-import com.magjin.ProductInfo;
-import com.magjin.ProductInfoRepository;
+
 import com.magjin.sevices.DbService;
+import com.magjin.sevices.TestsService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.Instant;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
+@RequestMapping("/api")
 public class TestController {
 
-
-    private DynamoDBMapper dynamoDBMapper;
-
-    @Autowired
-    private AmazonDynamoDB amazonDynamoDB;
+    Logger logger = LoggerFactory.getLogger(TestController.class);
 
     @Autowired
-    private ProductInfoRepository repository;
+    private TestsService testsService;
 
+    @RequestMapping("/tests")
+    public List<TestDto> getTests(@RequestParam(value="name", defaultValue="default") String name) {
+        logger.debug("getTests {} time {}", name, Instant.now().toString());
 
-    @Autowired
-    private DbService service;
+        return testsService.getAllTests();
+    }
+
+    @RequestMapping("/tests/{id}")
+    public TestDto getTestById(@PathVariable("id")  String id) {
+        logger.debug("getTestById {} time {}", id, Instant.now().toString());
+        return testsService.getTestById(id);
+    }
 
     @RequestMapping("/tst")
     public String greeting(@RequestParam(value="name", defaultValue="default") String name) {
         return "Test message " + name + ". Server time is " + Instant.now().toString();
     }
 
-    @RequestMapping("/tstDbSetup")
-    public String greeting2() {
-
-        service.tableInit();
-
-
-        return "Test message " + "tstDbSetup" + ". Server time is " + Instant.now().toString();
-    }
-
-    @RequestMapping("/tstIndx")
-    public String greeting3() {
-        service.checkIndex();
-        return "Test message . Server time is " + Instant.now().toString();
-    }
-
-    @RequestMapping("/tstInserts")
-    public String greeting4() {
-        service.insertEntities();
-        service.insertTags();
-        service.insertPrograms();
-        service.printAll();
-
-
-        return "Test message . Server time is " + Instant.now().toString();
-    }
 }
