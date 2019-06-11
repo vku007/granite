@@ -1,0 +1,42 @@
+Vladymyr.kuznietsov Aws1
+vku007i FearBolt1
+
+Aws1
+
+
+
+
+Administrator
+Adm1
+or
+1
+
+https://162844898652.signin.aws.amazon.com/console
+
+https://eu-central-1.console.aws.amazon.com/console/home?region=eu-central-1#
+
+You have been given access to the AWS Management Console for the Amazon Web Services account with the ID ending in 8652. You can get started by using the sign-in information provided below.
+
+-------------------------------------------------
+
+Sign-in URL: https://162844898652.signin.aws.amazon.com/console
+User name: Administrator
+
+
+
+Default VPC
+
+* 		vpc-d0a6aabb
+Group ID
+sg-d5f319b4	VPC ID
+vpc-d0a6aabb
+
+Instance:  i-092760a32bfdeeebbPublic DNS: ec2-18-184-7-111.eu-central-1.compute.amazonaws.com
+
+
+ssh -i “~/work/keys/administrator-eu-central-1.pem" ec2-user@ec2-18-184-7-111.eu-central-1.compute.amazonaws.com
+
+ssh -i "~/work/keys/administrator-eu-central-1.pem" ec2-user@ec2-18-184-7-111.eu-central-1.compute.amazonaws.com
+
+Play with docker
+https://docs.aws.amazon.com/AmazonECS/latest/developerguide/docker-basics.html

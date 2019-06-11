@@ -31,5 +31,64 @@ nice to have:
 stack:
 java 8, AWS, JS three.js, WebGL, GL_ES
 
+Stage 2 (UI time) plans:
+
+main effort - UI prototype + testing. offline and online
+
+external part - dto only + mock on server side. No AWS db, No AWS deployment
+
+login page (just stub)
+
+overview page
+  - news, ratings, messages
+  - preview components
+
+about page
+  - user's preferences
+
+search page
+  - search by criteria
+  - rating
+  - preview components
+
+manage page
+ - CRUD for own programms
+ - preview components
+
+creator's page
+ - edit program
+ - run program
+ - preview components
+
+UI entities:
+
+user: avatar
+      info
+      scores*
+      list of followers (users)
+
+program:
+      text
+      meta (version, user, created, edited)
+      list of tags
+      visibility (private or shared)
+      scores*
+
+tag:
+    type (common, custom)
+    visibility (private or shared)
+    text
+
+message (news)
+     text
+     meta (version, user, created, edited)
+     type (system, shared, privates)
+     isRead
+     is hide
+
+shared links *
+
+
+
 </body>
 </html>
