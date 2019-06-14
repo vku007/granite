@@ -13,6 +13,11 @@ import {HttpClientInMemoryWebApiModule, InMemoryBackendConfigArgs} from 'angular
 import { InMemoryDataService }  from './in-memory-data.service';
 import { TestDetailsComponent } from './test-details/test-details.component'
 import {HttpClientModule} from "@angular/common/http";
+import { LoginViewComponent } from './login-view/login-view.component';
+import { SighinViewComponent } from './sighin-view/sighin-view.component';
+import { OverviewViewComponent } from './overview-view/overview-view.component';
+import { AdminViewComponent } from './admin-view/admin-view.component';
+import { UserDetailViewComponent } from './user-detail-view/user-detail-view.component';
 
 const env = 'REAL';
 
@@ -24,7 +29,12 @@ const env = 'REAL';
     MessagesComponent,
     DashboardComponent,
     DynamoTestsComponent,
-    TestDetailsComponent
+    TestDetailsComponent,
+    LoginViewComponent,
+    SighinViewComponent,
+    OverviewViewComponent,
+    AdminViewComponent,
+    UserDetailViewComponent
   ],
   imports: [
     BrowserModule,

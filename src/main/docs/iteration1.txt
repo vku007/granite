@@ -1,0 +1,38 @@
+
+-----------------
+-as user i want to create a new account in system
+
+-as user i want to see and edit my account settings
+
+-as administrator i want to login system and have access
+to administrate view
+
+-as administrator i want to see and edit my account settings
+-as administrator i want to see and edit all accounts settings
+
+----------------
+there are 2 entities:
+-user
+-userDetails
+
+views components:
+
+-SignIn view
+-Login view
+-Overview View (landing page)
+-AccountDetail View (accessible via Overview View)
+
+-Administrative View (accessible via Overview View for admins only)
+-table with all users
+
+https://jasonwatmore.com/post/2018/10/29/angular-7-user-registration-and-login-example-tutorial
+
+form auth
+
+we have 3  roles:
+
+ GUEST
+ USER
+ ADMIN
+
+ during development will use UI fake services

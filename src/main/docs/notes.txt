@@ -1,0 +1,26 @@
+Модуль в ангуляре - это класс, помеченный @NgModule
+
+интересно, что свойство Declaration содержит не только компоненты, но и директивы и пайпы
+
+Providers - тут мы регистрируем сервисы
+
+тут будет лог по iteration1
+
+вдохновляемся https://jasonwatmore.com/post/2018/10/29/angular-7-user-registration-and-login-example-tutorial
+
+итак, создадим 4 вью-компонента:
+
+login-view - компонент, содержащий форму ввода кредов
+ -  роутинг /login
+sighin-view - компонент, содержащий форму ввода нового user
+ -  роутинг /sighin
+overview-view - компонент, содержаший лендинг-приветствие и ссылки на login-view и signin-view
+ - дефолтный роутинг /-> /overview доступен всем
+admin-view -
+ -  роутинг /admin доступен только авторизованым пользователям
+user-detail-view
+ -  роутинг /details доступен только  пользователям (not guest)
+
+
+
+

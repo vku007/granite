@@ -1,3 +1,7 @@
 typical flow for creating pages or entities
 
 1. routing
+
+creation of component
+
+ng generate component programs
