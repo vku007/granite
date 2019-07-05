@@ -5,3 +5,9 @@ typical flow for creating pages or entities
 creation of component
 
 ng generate component programs
+
+
+генерация сервиса в папке:
+
+ng g s services/authService
+

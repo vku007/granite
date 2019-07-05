@@ -21,6 +21,9 @@ admin-view -
 user-detail-view
  -  роутинг /details доступен только  пользователям (not guest)
 
+ касательно rxjs:
+ https://rxjs-dev.firebaseapp.com/guide/operators
+
 
 
 

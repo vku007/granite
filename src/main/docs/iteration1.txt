@@ -36,3 +36,8 @@ we have 3  roles:
  ADMIN
 
  during development will use UI fake services
+
+ создадим 2 сервиса:
+
+ ng g s services/authService
+ ng g s services/userService

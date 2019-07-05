@@ -39,6 +39,12 @@ export class InMemoryDataService  implements InMemoryDbService {
       if (reqInfo.collectionName === 'calls') {
         return this.getCallResponse(reqInfo);
       }
+      if (reqInfo.collectionName === 'calls') {
+        return this.getCallResponse(reqInfo);
+      }
+
+      console.log('HTTP POST override: reqInfo = ' + reqInfo.url);
+      //api/users/authenticate
       return undefined; // let the default GET handle all others
 
     });
