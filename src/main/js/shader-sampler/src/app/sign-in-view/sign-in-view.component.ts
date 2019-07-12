@@ -46,7 +46,8 @@ export class SignInViewComponent implements OnInit {
 
     this.loading = true;
 
-     let user :User = {
+     //noinspection TypeScriptUnresolvedVariable
+    let user :User = {
         id: 0,
         userName: this.f.username.value,
         firstName: this.f.firstname.value,
@@ -55,6 +56,7 @@ export class SignInViewComponent implements OnInit {
         token: "xxx"
      };
 
+    //noinspection TypeScriptValidateTypes
     this.userService.register(user)
       .pipe(first()) // it unsubscribes after first call
       .subscribe(

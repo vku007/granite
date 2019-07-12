@@ -1,3 +1,35 @@
 <p>
   admin-view works!
 </p>
+
+<mat-table>
+
+  <!-- >
+The ng-container element will NOT be rendered to the screen
+    </-->
+  <ng-container matColumnDef="userName">
+    <div *matHeaderCellDef>User Name</div>
+    <div *matCellDef="let usr">{{usr.userName}}</div>
+  </ng-container>
+
+  <ng-container matColumnDef="firstName">
+    <div *matHeaderCellDef>First Name</div>
+    <div *matCellDef="let usr">{{usr.firstName}}</div>
+  </ng-container>
+
+  <ng-container matColumnDef="lastName">
+    <div *matHeaderCellDef>Last Name</div>
+    <div *matCellDef="let usr">{{usr.lastName}}</div>
+  </ng-container>
+
+
+
+  <mat-header-row *matHeaderRowDef="displayedColumns">
+
+  </mat-header-row *matRowDef="let row; columns: displayedColumns" >
+
+  <mat-row>
+
+  </mat-row>
+
+</mat-table>

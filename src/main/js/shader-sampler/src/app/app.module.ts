@@ -21,6 +21,10 @@ import { UserDetailViewComponent } from './user-detail-view/user-detail-view.com
 import {JwtInterceptor} from "./services/token.interceptor";
 import {ErrorInterceptor} from "./services/error.interceptor";
 import {fakeBackendProvider} from "./services/fake-backend.interceptor";
+import {
+  MatInputModule, MatPaginatorModule, MatTableModule, MatSortModule,
+  MatProgressSpinnerModule
+} from "@angular/material";
 const env = 'REAL';
 
 @NgModule({
@@ -42,7 +46,12 @@ const env = 'REAL';
     BrowserModule,
     ReactiveFormsModule,
     AppRoutingModule,
-    HttpClientModule//,
+    HttpClientModule,
+    MatInputModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatProgressSpinnerModule//,
     //env === 'REAL' ? //, // the order is important
     //[] :
     //HttpClientInMemoryWebApiModule.forRoot(

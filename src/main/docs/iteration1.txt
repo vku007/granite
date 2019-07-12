@@ -41,3 +41,15 @@ we have 3  roles:
 
  ng g s services/authService
  ng g s services/userService
+
+ 1.2
+ для работы с юзерами нам нужна таблица.
+ за основу берем
+ https://material.angular.io/guide/getting-started
+ и
+ https://blog.angular-university.io/angular-material-data-table/
+
+ npm install --save @angular/material @angular/cdk @angular/animations
+ npm install -g typescript@latest
+ ng update --all
+
