@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {InMemoryDbService, RequestInfo, ResponseOptions, STATUS, getStatusText} from "angular-in-memory-web-api";
+
 import {DynamoTest} from "./dynamo-test";
 
 
@@ -8,7 +8,7 @@ import {DynamoTest} from "./dynamo-test";
 @Injectable({
   providedIn: 'root'
 })
-export class InMemoryDataService  implements InMemoryDbService {
+export class InMemoryDataService    {
 //It natively handles URI patterns in the form :base/:collectionName/:id?
 // tests show fast approach
   createDb() {
@@ -32,7 +32,7 @@ export class InMemoryDataService  implements InMemoryDbService {
   constructor() { }
 
   // a bit more complicated approach: override post method:
-
+/*
   post(reqInfo: RequestInfo) {
     return reqInfo.utils.createResponse$(() => {
       console.log('HTTP POST override');
@@ -78,4 +78,5 @@ export class InMemoryDataService  implements InMemoryDbService {
   genId(tests: any): number {
     return tests.length > 0 ? Math.max(...tests.map(test => test.id)) + 1 : 11;
   }
+  */
 }
