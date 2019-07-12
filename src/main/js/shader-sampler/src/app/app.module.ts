@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ProgramsComponent } from './programs/programs.component';
-import { FormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { ProgramDetailComponent } from './program-detail/program-detail.component';
 import { MessagesComponent } from './messages/messages.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -14,7 +14,7 @@ import { DynamoTestsComponent } from './dynamo-tests/dynamo-tests.component';
 import { TestDetailsComponent } from './test-details/test-details.component'
 import {HttpClientModule, HTTP_INTERCEPTORS} from "@angular/common/http";
 import { LoginViewComponent } from './login-view/login-view.component';
-import { SighinViewComponent } from './sighin-view/sighin-view.component';
+import { SignInViewComponent } from './sign-in-view/sign-in-view.component';
 import { OverviewViewComponent } from './overview-view/overview-view.component';
 import { AdminViewComponent } from './admin-view/admin-view.component';
 import { UserDetailViewComponent } from './user-detail-view/user-detail-view.component';
@@ -33,14 +33,14 @@ const env = 'REAL';
     DynamoTestsComponent,
     TestDetailsComponent,
     LoginViewComponent,
-    SighinViewComponent,
+    SignInViewComponent,
     OverviewViewComponent,
     AdminViewComponent,
     UserDetailViewComponent
   ],
   imports: [
     BrowserModule,
-    FormsModule,
+    ReactiveFormsModule,
     AppRoutingModule,
     HttpClientModule//,
     //env === 'REAL' ? //, // the order is important

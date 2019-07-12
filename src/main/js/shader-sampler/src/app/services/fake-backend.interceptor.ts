@@ -7,6 +7,8 @@ import {Observable, of, throwError} from "rxjs";
 import {HttpEvent} from "@angular/common/http";
 import {mergeMap, materialize, delay, dematerialize} from "rxjs/internal/operators";
 import {HttpResponse} from "@angular/common/http";
+import {URLS} from "../settings"
+import {FakeAuthServiceProvider} from "./fake-auth";
 
 
 // array in local storage for registered users
@@ -15,110 +17,47 @@ import {HttpResponse} from "@angular/common/http";
 
 let users = JSON.parse(localStorage.getItem('users')) || [];
 
+
 @Injectable()
 export class FakeBackendInterceptor implements HttpInterceptor {
+
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    const { url, method, headers, body } = request; //  Object destructuring
+    const {url, method, headers, body} = request; //  Object destructuring
     // wrap in delayed observable to simulate server api call
+    let url2 = url as String;
+
+
     return of(null)
       .pipe(mergeMap(handleRoute))
       .pipe(materialize()) // call materialize and dematerialize to ensure delay even if an error is thrown (https://github.com/Reactive-Extensions/RxJS/issues/648)
       .pipe(delay(500))
       .pipe(dematerialize());
 
-    function handleRoute() {
-      switch (true) {
-        case url.endsWith('/users/register') && method === 'POST':
-          return register();
-        case url.endsWith('/users/authenticate') && method === 'POST':
-          return authenticate();
-        case url.endsWith('/users') && method === 'GET':
-          return getUsers();
-        case url.match(/\/users\/\d+$/) && method === 'GET':
-          return getUserById();
-        case url.match(/\/users\/\d+$/) && method === 'DELETE':
-          return deleteUser();
-        default:
-          // pass through any requests not handled above!!!!
-          return next.handle(request);
-      }
-    }
 
-    // route functions
+    // it seems, all jumps with handleRoute has one target - we need to return next.handle(request) in case of no-match event
+    function handleRoute(): Observable<HttpEvent<any>> {
 
-    function register() {
-      const user = body
+      const auth = new FakeAuthServiceProvider();
 
-      if (users.find(x => x.username === user.username)) {
-        return error('Username "' + user.username + '" is already taken')
+      if (!url2) {
+        console.log("handleRoute got bad url : " + url2);
+        return next.handle(request);
       }
 
-      user.id = users.length ? Math.max(...users.map(x => x.id)) + 1 : 1;
-      users.push(user);
-      localStorage.setItem('users', JSON.stringify(users));
+      let observableAuth: Observable<HttpEvent<any>> = auth.doFilter(request);
 
-      return ok();
-    }
-
-    function authenticate() {
-      const { username, password } = body;
-      const user = users.find(x => x.username === username && x.password === password);
-      if (!user) return error('Username or password is incorrect');
-      return ok({
-        id: user.id,
-        username: user.username,
-        firstName: user.firstName,
-        lastName: user.lastName,
-        token: 'fake-jwt-token'
-      })
-    }
-
-    function getUsers() {
-      if (!isLoggedIn()) return unauthorized();
-      return ok(users);
-    }
-
-    function getUserById() {
-      if (!isLoggedIn()) return unauthorized();
-
-      const user = users.find(x => x.id == idFromUrl());
-      return ok(user);
-    }
-
-    function deleteUser() {
-      if (!isLoggedIn()) return unauthorized();
-
-      users = users.filter(x => x.id !== idFromUrl());
-      localStorage.setItem('users', JSON.stringify(users));
-      return ok();
-    }
-// helper functions
-
-    function ok(body?) {
-      return of(new HttpResponse({ status: 200, body }))
-    }
-
-    function unauthorized() {
-      return throwError({ status: 401, error: { message: 'Unauthorised' } });
-    }
-
-    function error(message) {
-      return throwError({ error: { message } });
-    }
-
-    function isLoggedIn() {
-      return headers.get('Authorization') === 'Bearer fake-jwt-token';
-    }
-
-    function idFromUrl() {
-      const urlParts = url.split('/');
-      return parseInt(urlParts[urlParts.length - 1]);
+      if (observableAuth) {
+        return observableAuth;
+      } else {
+        console.log("handleRoute miss! : " + url);
+        return next.handle(request);
+      }
     }
   }
 }
 
 
-    export const fakeBackendProvider = {
+export const fakeBackendProvider = {
   // use fake backend in place of Http service for backend-less development
   provide: HTTP_INTERCEPTORS,
   useClass: FakeBackendInterceptor,

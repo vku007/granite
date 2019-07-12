@@ -1,31 +1,34 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {User} from "../models/user";
+import {Observable} from "rxjs";
+import {URLS} from "../settings";
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserServiceService {
 
-  constructor(private http: HttpClient) { }
-
-  getAll() {
-    return this.http.get<User[]>('api/users');
+  constructor(private http: HttpClient) {
   }
 
-  getById(id: number) {
-    return this.http.get('api/users/${id}');
+  getAll(): Observable<User[]> {
+    return this.http.get(URLS.authBase + URLS.userAll) as Observable<User[]>;
   }
 
-  register(user: User) {
-    return this.http.post('api/users/register', user);
+  getByUserName(name: number): Observable<User> {
+    return this.http.get<User>(URLS.authBase + URLS.userByName + '${name}') as Observable<User>;
   }
 
-  update(user: User) {
-    return this.http.put('api/users/${user.id}', user);
+  register(user: User): Observable<User> {
+    return this.http.post(URLS.authBase + URLS.userRegistration, user) as Observable<User>;
   }
 
-  delete(id: number) {
-    return this.http.delete('api/users/${id}');
+  update(user: User): Observable<User> {
+    return this.http.put(URLS.authBase + URLS.userByName + '${user.name}', user) as Observable<User>;
+  }
+
+  delete(user: User): Observable<boolean> {
+    return this.http.delete(URLS.authBase + URLS.userByName + '${user.name}') as Observable<boolean>;
   }
 }

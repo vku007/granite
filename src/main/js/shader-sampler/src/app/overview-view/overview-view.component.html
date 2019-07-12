@@ -1,23 +1,27 @@
 <p>
   overview-view works!
-  link to login
-  link to sigh-in
-  link to details
-  link to admin view
+
 </p>
 
+<div *ngIf="error" class="alert alert-danger">{{error}}</div>
 
 <div style="text-align:center">
   <h1>
     Welcome to overview-view! It is a landing page, btw
   </h1>
 
-  <nav>
-    <a routerLink="/login">to login</a>
+  <div *ngIf="currentUser">
+
+Hi {{currentUser.firstName }} {{currentUser.lastName }}
     <a routerLink="/sighin">to sigh-in</a>
     <a routerLink="/detail/xxx">to details</a>
     <a routerLink="/admin">to admin view</a>
-  </nav>
+  </div>
+
+  <div *ngIf="!currentUser">
+      Hi public user!
+  </div>
+
 </div>
 
 

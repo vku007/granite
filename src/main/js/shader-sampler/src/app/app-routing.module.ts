@@ -7,7 +7,7 @@ import {OverviewViewComponent} from "./overview-view/overview-view.component";
 import {AdminViewComponent} from "./admin-view/admin-view.component";
 import {UserDetailViewComponent} from "./user-detail-view/user-detail-view.component";
 import {LoginViewComponent} from "./login-view/login-view.component";
-import {SighinViewComponent} from "./sighin-view/sighin-view.component";
+import {SignInViewComponent} from "./sign-in-view/sign-in-view.component";
 //The order of the routes in the configuration matters
 const old_routes: Routes = [
   { path: '', redirectTo: '/dynamo', pathMatch: 'full' },
@@ -21,7 +21,7 @@ const routes: Routes = [
   { path: '', redirectTo: '/overview', pathMatch: 'full' },
   { path: 'overview', component: OverviewViewComponent},
   { path: 'login', component: LoginViewComponent },
-  { path: 'sighin', component: SighinViewComponent },
+  { path: 'signin', component: SignInViewComponent },
   { path: 'admin', component: AdminViewComponent },
   { path: 'detail/:id', component: UserDetailViewComponent },
   { path: '**', redirectTo: '/overview', pathMatch: 'full'  }

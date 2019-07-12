@@ -1,3 +1,5 @@
+ng serve --open
+
 typical flow for creating pages or entities
 
 1. routing

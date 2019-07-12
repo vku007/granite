@@ -1,0 +1,9 @@
+Справочник по источникам событий в Rx
+https://habr.com/ru/company/funcorp/blog/459174/
+
+
+https://angular.io/guide/observables
+
+https://jasonwatmore.com/post/2019/05/02/angular-7-mock-backend-example-for-backendless-development
+
+https://medium.com/slido-dev-blog/angular-flux-architecture-introduction-f051a24aedfe

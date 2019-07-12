@@ -29,21 +29,24 @@ export class AuthServiceService {
   // there is a important thing: we just return observable, so anybody could to subscribe on it. Subscription will call
   // function. But the result (user) will not be returned!!! only subscribers on  currentUser will receive the notification!
   login(username: string, password: string) {
+
     console.log("AuthServiceService:login");
+
     return this.http.post<any>('api/users/authenticate', { username, password })
       .pipe(map(user => {
         // login successful if there's a token in the response
+        console.log("got user " + user);
         if (user && user.token) {
           // store user details and jwt token in local storage to keep user logged in between page refreshes
           localStorage.setItem('currentUser', JSON.stringify(user));
           this.currentUserSubject.next(user); // sending message to subscribers
         }
 
-        return user;
+        return user; // send null?
       }) );
   }
 
-  // it is BAD using!!! subscribe instead!
+  // it is BAD using!!! subscribe instead! hmm...
   public get currentUserValue(): User {
     return this.currentUserSubject.value;
   }

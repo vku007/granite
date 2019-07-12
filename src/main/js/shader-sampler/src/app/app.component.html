@@ -1,4 +1,4 @@
-<div style="text-align:center">
+<!--div style="text-align:center">
   <h1>
     Welcome to {{ title }}!
   </h1>
@@ -7,9 +7,36 @@
     <a routerLink="/programs">Programs</a>
     <a routerLink="/dynamo">Dynamo DB tests</a>
   </nav>
+</div-->
+
+<!-- nav *ngIf="currentUser" -->
+<nav class="navbar navbar-expand navbar-dark bg-dark" *ngIf="currentUser">
+  boom
+  <div class="navbar-nav">
+    <a class="nav-item nav-link" routerLink="/">Home</a>
+    <a class="nav-item nav-link" (click)="logout()">Logout</a>
+  </div>
+</nav>
+
+<nav class="navbar navbar-expand navbar-dark bg-dark" *ngIf="!currentUser">
+  boom
+  <div class="navbar-nav">
+    <a class="nav-item nav-link" routerLink="/">Home</a>
+    <a class="nav-item nav-link" routerLink="/login">Log In</a>
+    <a class="nav-item nav-link" routerLink="/signin">Sign In</a>
+  </div>
+</nav>
+
+
+<!-- main content container -->
+<div class="jumbotron">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-8 offset-sm-2">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
 </div>
-
-
-<router-outlet></router-outlet>
 
 <app-messages></app-messages>
