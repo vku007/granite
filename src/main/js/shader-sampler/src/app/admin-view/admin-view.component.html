@@ -1,35 +1,50 @@
 <p>
-  admin-view works!
+  admin-view works! Examle with no table
 </p>
+<div class="admin-main-container">
+  <app-user-detail [chosenOne]="selectedUser"> </app-user-detail>
 
-<mat-table>
+  <div class="users-table">
+    <mat-table class=" mat-elevation-z8" [dataSource]="dataSource">
 
-  <!-- >
-The ng-container element will NOT be rendered to the screen
-    </-->
-  <ng-container matColumnDef="userName">
-    <div *matHeaderCellDef>User Name</div>
-    <div *matCellDef="let usr">{{usr.userName}}</div>
-  </ng-container>
+      <!-- >
+    The ng-container element will NOT be rendered to the screen
 
-  <ng-container matColumnDef="firstName">
-    <div *matHeaderCellDef>First Name</div>
-    <div *matCellDef="let usr">{{usr.firstName}}</div>
-  </ng-container>
+    the order of the ng-container elements does NOT determine the column visual order
+        </-->
+      <ng-container matColumnDef="userName">
+        <mat-header-cell class="username-cell" *matHeaderCellDef>User Name</mat-header-cell>
+        <mat-cell class="username-cell" *matCellDef="let usr">{{usr.userName}}</mat-cell>
+      </ng-container>
 
-  <ng-container matColumnDef="lastName">
-    <div *matHeaderCellDef>Last Name</div>
-    <div *matCellDef="let usr">{{usr.lastName}}</div>
-  </ng-container>
+      <ng-container matColumnDef="firstName">
+        <mat-header-cell class="firstname-cell" *matHeaderCellDef>First Name</mat-header-cell>
+        <mat-cell class="firstname-cell" *matCellDef="let usr">{{usr.firstName}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="lastName">
+        <mat-header-cell class="lastname-cell" *matHeaderCellDef>Last Name</mat-header-cell>
+        <mat-cell class="lastname-cell" *matCellDef="let usr">{{usr.lastName}}</mat-cell>
+      </ng-container>
+
+
+      <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+
+      <mat-row *matRowDef="let row; columns: displayedColumns" [class.selected] = "selection.isSelected(row)" (click)="onRowClicked(row)"></mat-row>
+
+
+    </mat-table>
+    <mat-paginator [length]="currentUsersCount" [pageSize]="3"
+                   [pageSizeOptions]="[3, 5, 10]"></mat-paginator>
+
+  </div>
+  <div class="spinner-container">
+    <div *ngIf="dataSource.loading$ | async">
+      <mat-spinner strokeWidth="3" [diameter]="50"></mat-spinner>
+    </div>
+  </div>
 
 
 
-  <!--mat-header-row *matHeaderRowDef="displayedColumns">
 
-  </mat-header-row *matRowDef="let row; columns: displayedColumns" -->
-
-  <mat-row>
-
-  </mat-row>
-
-</mat-table>
+</div>

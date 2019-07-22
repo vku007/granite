@@ -53,3 +53,5 @@ we have 3  roles:
  npm install -g typescript@latest
  ng update --all
 
+ https://css-tricks.com/snippets/css/a-guide-to-flexbox/
+

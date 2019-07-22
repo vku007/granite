@@ -3,6 +3,7 @@ import {HttpRequest} from "@angular/common/http";
 import {URLS} from "../settings";
 import {HttpResponse} from "@angular/common/http";
 import {User} from "../models/user";
+import {Page} from "./page";
 
 // array in local storage for registered users
 // actually, we could to use just array here, couldn't we?
@@ -22,6 +23,9 @@ export class FakeAuthServiceProvider {
 
 
     console.log("FakeAuthServiceProvider: url " + url);
+    console.log("FakeAuthServiceProvider: method " + method);
+    console.log("FakeAuthServiceProvider: body " + body);
+    console.log("FakeAuthServiceProvider: headers " + headers);
     const regForUserByName = /\/api\/users\/byName\/\d+$/;
 
     //noinspection TypeScriptUnresolvedFunction
@@ -35,9 +39,9 @@ export class FakeAuthServiceProvider {
 
           return authenticate();
 
-        case url.endsWith(URLS.authBase + URLS.userAll) && method === 'GET':
+        case url.includes(URLS.authBase + URLS.userAll) && method === 'GET':
 
-          return getUsers();
+          return getUsers(request);
 
           // todo
         case url.match(regForUserByName) && method === 'GET':
@@ -87,13 +91,43 @@ export class FakeAuthServiceProvider {
         username: user.username,
         firstName: user.firstName,
         lastName: user.lastName,
-        token: 'fake-token'
+        token: 'fake-jwt-token'
       })
     }
 
-    function getUsers() {
+    function getUsers(request: HttpRequest<any>) {
+
       if (!isLoggedIn()) return unauthorized();
-      return ok(users);
+
+      console.log("fake auth returns users" );
+
+      let pageIndex = 0;
+
+      let pageSize = 3;
+
+      console.log( "url=" + request.urlWithParams );
+
+      console.log( "params=" + request.params );
+
+      if (request.params.has("pageIndex")) {
+        console.log("got pageIndex = ", pageIndex);
+        pageIndex = Number(request.params.get("pageIndex"));
+      }
+
+      if (request.params.has("pageSize")) {
+        console.log("got pageSize = ", pageSize);
+        pageSize = Number(request.params.get("pageSize"));
+      }
+
+      let values = users.slice(pageIndex * pageSize, pageIndex * pageSize +  pageSize);
+
+      let resultPage = new Page<User>();
+      resultPage.pageNum = pageIndex;
+      resultPage.pageSize = pageSize;
+      resultPage.totalSize = users.length;
+      resultPage.values = values;
+
+      return ok(resultPage);
     }
 
     function getUserByName() {
@@ -127,7 +161,6 @@ export class FakeAuthServiceProvider {
     function isLoggedIn() {
       return headers.get('Authorization') === 'Bearer fake-jwt-token';
     }
-
 
     // just last piece
     function nameFromUrl() {

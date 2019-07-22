@@ -25,6 +25,8 @@ import {
   MatInputModule, MatPaginatorModule, MatTableModule, MatSortModule,
   MatProgressSpinnerModule
 } from "@angular/material";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import { UserDetailComponent } from './user-detail/user-detail.component';
 const env = 'REAL';
 
 @NgModule({
@@ -40,10 +42,12 @@ const env = 'REAL';
     SignInViewComponent,
     OverviewViewComponent,
     AdminViewComponent,
-    UserDetailViewComponent
+    UserDetailViewComponent,
+    UserDetailComponent
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     ReactiveFormsModule,
     AppRoutingModule,
     HttpClientModule,

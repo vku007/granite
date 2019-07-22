@@ -3,6 +3,9 @@ import {HttpClient} from "@angular/common/http";
 import {User} from "../models/user";
 import {Observable} from "rxjs";
 import {URLS} from "../settings";
+import {HttpParams} from "@angular/common/http";
+import {HttpHeaders} from "@angular/common/http";
+import {Page} from "./page";
 
 @Injectable({
   providedIn: 'root'
@@ -12,8 +15,19 @@ export class UserServiceService {
   constructor(private http: HttpClient) {
   }
 
-  getAll(): Observable<User[]> {
-    return this.http.get(URLS.authBase + URLS.userAll) as Observable<User[]>;
+  getUsers(pageIndex: number, pageSize: number): Observable<Page<User>> {
+    console.log("UserServiceService: getAll");
+    const  params = new  HttpParams();
+    params.append("pageIndex", pageIndex.toString());
+    params.append("pageSize", pageSize.toString());
+    console.log("getUsers:" + pageIndex.toString() + pageSize.toString() )
+
+    const  headers = new  HttpHeaders();
+
+    const options = { params: new HttpParams()
+      .set("pageIndex", pageIndex.toString())
+      .set("pageSize", pageSize.toString())};
+    return this.http.get(URLS.authBase + URLS.userAll, options) as Observable<Page<User>>;
   }
 
   getByUserName(name: number): Observable<User> {
