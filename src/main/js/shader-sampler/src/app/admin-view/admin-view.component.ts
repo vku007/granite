@@ -17,7 +17,7 @@ export class AdminViewComponent implements AfterViewInit, OnInit {
   // the ng-container column sections (specified via the matColumnDef directive).
   //It's this array that determines the visual order of the columns!
 
-  displayedColumns = ["userName",  "lastName","firstName"];
+  displayedColumns = ["userName",  "lastName","firstName", "editBtn"];
 
   dataSource: UserDataSource;
 

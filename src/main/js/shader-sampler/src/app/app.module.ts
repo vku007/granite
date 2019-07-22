@@ -23,7 +23,7 @@ import {ErrorInterceptor} from "./services/error.interceptor";
 import {fakeBackendProvider} from "./services/fake-backend.interceptor";
 import {
   MatInputModule, MatPaginatorModule, MatTableModule, MatSortModule,
-  MatProgressSpinnerModule
+  MatProgressSpinnerModule, MatIconModule
 } from "@angular/material";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import { UserDetailComponent } from './user-detail/user-detail.component';
@@ -55,6 +55,7 @@ const env = 'REAL';
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
+    MatIconModule,
     MatProgressSpinnerModule//,
     //env === 'REAL' ? //, // the order is important
     //[] :

@@ -27,6 +27,13 @@
         <mat-cell class="lastname-cell" *matCellDef="let usr">{{usr.lastName}}</mat-cell>
       </ng-container>
 
+      <ng-container matColumnDef="editBtn" stickyEnd>
+        <mat-header-cell class="editBtn-cell" *matHeaderCellDef></mat-header-cell>
+        <mat-cell class="editBtn-cell" *matCellDef="let usr">
+          <i class="material-icons">face</i>
+        </mat-cell>
+      </ng-container>
+
 
       <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
 
