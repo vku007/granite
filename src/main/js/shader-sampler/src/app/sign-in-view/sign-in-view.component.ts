@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from "@angular/router";
-import {UserServiceService} from "../services/user-service.service";
+import {UserService} from "../services/user-service";
 import {FormGroup, FormBuilder, Validators} from "@angular/forms";
 import {User} from "../models/user";
 import {first} from "rxjs/internal/operators";
@@ -20,7 +20,7 @@ export class SignInViewComponent implements OnInit {
   constructor(
     private router: Router,
     private formBuilder: FormBuilder,
-    private userService: UserServiceService) { }
+    private userService: UserService) { }
 
   ngOnInit() {
     this.signinForm = this.formBuilder.group({
@@ -59,10 +59,10 @@ export class SignInViewComponent implements OnInit {
     //noinspection TypeScriptValidateTypes
     this.userService.register(user)
       .pipe(first()) // it unsubscribes after first call
-      .subscribe(
+      .subscribe( // todo - add auto login
         data => {
-          //this.router.navigate([this.returnUrl]); todo fix it
           console.log("register data:" + data);
+
           this.router.navigate(["overview"]); // to landing
         },
         error => {

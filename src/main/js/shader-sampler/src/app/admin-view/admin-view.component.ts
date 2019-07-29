@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewChild, AfterViewInit} from '@angular/core';
 import {UserDataSource} from "../services/user-data-source";
-import {UserServiceService} from "../services/user-service.service";
+import {UserService} from "../services/user-service";
 import {MatPaginator} from "@angular/material";
 import {ActivatedRoute} from "@angular/router";
 import {tap} from "rxjs/internal/operators";
@@ -28,7 +28,7 @@ export class AdminViewComponent implements AfterViewInit, OnInit {
   @ViewChild(MatPaginator, {static: false})
   paginator: MatPaginator;
 
-  constructor(private userService: UserServiceService,
+  constructor(private userService: UserService,
               private route: ActivatedRoute) {
 
   }

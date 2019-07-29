@@ -1,7 +1,7 @@
 import {DataSource, CollectionViewer} from "@angular/cdk/collections";
 import {User} from "../models/user";
 import {BehaviorSubject, Observable, of} from "rxjs";
-import {UserServiceService} from "./user-service.service";
+import {UserService} from "./user-service";
 import {Injectable} from "@angular/core";
 import {catchError, finalize} from "rxjs/internal/operators";
 import {Page} from "./page";
@@ -19,7 +19,7 @@ export class UserDataSource implements DataSource<User> {
 
   //public usersSubject$ = this.usersSubject.asObservable();
 
-  constructor(private service: UserServiceService) {
+  constructor(private service: UserService) {
 
   }
 
@@ -43,6 +43,7 @@ export class UserDataSource implements DataSource<User> {
   loadUsers(filter = '', sortDirection = 'asc', pageIndex = 0, pageSize = 3) {
     this.loadingSubject.next(true);
 
+    //noinspection TypeScriptValidateTypes
     this.service.getUsers(pageIndex, pageSize).pipe(
       catchError(() => of([])),
       finalize(() => this.loadingSubject.next(false))

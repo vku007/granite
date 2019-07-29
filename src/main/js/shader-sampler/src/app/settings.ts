@@ -1,11 +1,12 @@
 export const URLS = {
   testsBase: "api/tests",
   callsBase: "api/calls",
-  authBase: "api/users",
+
+  authBase: "api/auth",
   userAuth: "/authenticate",
+
+  usersBase: "api/users",
   userRegistration: "/register",
-  userAll: "/all",
+  allUsers: "/all",
   userByName: "/byName/"
-
-
 };

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {User} from "../models/user";
 import {Subscription} from "rxjs";
-import {AuthServiceService} from "../services/auth-service.service";
+import {AuthService} from "../services/auth-service";
 
 @Component({
   selector: 'app-overview-view',
@@ -14,7 +14,7 @@ export class OverviewViewComponent implements OnInit {
   currentUserSubscription: Subscription;
   users: User[] = [];
 
-  constructor(private authenticationService: AuthServiceService) {
+  constructor(private authenticationService: AuthService) {
 
     this.currentUserSubscription = this.authenticationService.currentUser.subscribe(user => {
       this.currentUser = user;

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {AuthServiceService} from "../services/auth-service.service";
+import {AuthService} from "../services/auth-service";
 import {
   Subscription, Observable, of, interval, fromEvent, merge, forkJoin, race, zip, Subject, from,
   ConnectableObservable, ReplaySubject
@@ -28,7 +28,7 @@ export class LoginViewComponent implements OnInit {
   constructor(        private formBuilder: FormBuilder,
                       private route: ActivatedRoute,
                       private router: Router,
-                      private authenticationService: AuthServiceService) {
+                      private authenticationService: AuthService) {
     if (this.authenticationService.currentUserValue) {
 
       // redirect to home if already logged in
@@ -79,17 +79,6 @@ export class LoginViewComponent implements OnInit {
 
   }
 
-  goLogout() {
-    this.authenticationService.logout();
-    // redirect?
-  }
-
-  goLogin() {
-    //Observables are declarative—that is, you define a function for publishing values,
-    // but it is not executed until a consumer subscribes to it.
-    let s: Subscription;
-    s = this.authenticationService.login("name", "pass").subscribe();
-  }
 
   doTest() {
     let values =[];

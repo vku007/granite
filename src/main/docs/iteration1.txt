@@ -55,3 +55,32 @@ we have 3  roles:
 
  https://css-tricks.com/snippets/css/a-guide-to-flexbox/
 
+ Iteration 1.3
+ check
+
+-Overview View (landing page) with links to
+   - Login
+   - Signin
+
+   if not loaded -> public user
+   if authorized -> specific user
+
+Login with links to
+   - Overview
+   - Signin
+
+steps
+- cleaning and fitting overview
+- cleaning and fitting login view
+- cleaning and fitting signin view
+
+- implement form for edit current user info (UserDetail View)
+- redesign admin view, add the ability to add/remove the user role
+- create user back-end
+- create auth back-end
+
+
+
+
+
+

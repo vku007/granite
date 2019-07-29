@@ -3,11 +3,12 @@ import {BehaviorSubject, Observable, pipe} from 'rxjs';
 import { map } from 'rxjs/operators';
 import {User} from "../models/user";
 import {HttpClient} from "@angular/common/http";
+import {URLS} from "../settings";
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthServiceService {
+export class AuthService {
 
   //Every Subject is an Observable and an Observer.
   private currentUserSubject: BehaviorSubject<User>;
@@ -30,9 +31,9 @@ export class AuthServiceService {
   // function. But the result (user) will not be returned!!! only subscribers on  currentUser will receive the notification!
   login(username: string, password: string) {
 
-    console.log("AuthServiceService:login");
+    console.log("AuthService:login");
 
-    return this.http.post<any>('api/users/authenticate', { username, password })
+    return this.http.post<any>(URLS.authBase + URLS.userAuth, { username, password })
       .pipe(map(user => {
         // login successful if there's a token in the response
         console.log("got user " + user);
@@ -46,13 +47,12 @@ export class AuthServiceService {
       }) );
   }
 
-  // it is BAD using!!! subscribe instead! hmm...
   public get currentUserValue(): User {
     return this.currentUserSubject.value;
   }
 
   logout() {
-    console.log("AuthServiceService:logout")
+    console.log("AuthService:logout")
     // remove user from local storage and set current user to null
     localStorage.removeItem('currentUser');
     this.currentUserSubject.next(null);
